@@ -7,7 +7,7 @@ services:
       - "80"
 
   npm-registry:
-    image: verdaccio/verdaccio:6.9.0@sha256:11e75353c8363650cbf43adf8594b2cd633be6f191056c6e08ba6ff4b1398f62
+    image: verdaccio/verdaccio:6.10.1@sha256:fcb86134563534e2f634752e6c6c3edcdb78242ec16578c73ce39d1dadbaa801
     ports:
       - "4873"
     volumes:
