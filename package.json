@@ -1,7 +1,7 @@
 {
   "name": "semantic-release",
   "description": "Automated semver compliant package publishing",
-  "version": "0.0.0-development",
+  "version": "25.0.9+cleyrop.1",
   "type": "module",
   "author": "Stephan Bönnemann <stephan@boennemann.me> (http://boennemann.me)",
   "ava": {
