@@ -244,7 +244,7 @@ test("Push tag to remote repository", async (t) => {
   const commits = await gitCommits(["Test commit"], { cwd });
 
   await tag("tag_name", "HEAD", { cwd });
-  await push(repositoryUrl, { cwd });
+  await push(repositoryUrl, "tag_name", { cwd });
 
   t.is(await gitRemoteTagHead(repositoryUrl, "tag_name", { cwd }), commits[0].hash);
 });
@@ -258,7 +258,7 @@ test("Push tag to remote repository with remote branch ahead", async (t) => {
   await gitPush("origin", "master", { cwd: temporaryRepo });
 
   await tag("tag_name", "HEAD", { cwd });
-  await push(repositoryUrl, { cwd });
+  await push(repositoryUrl, "tag_name", { cwd });
 
   t.is(await gitRemoteTagHead(repositoryUrl, "tag_name", { cwd }), commits[0].hash);
 });
@@ -488,7 +488,7 @@ test("Does not execute a `repositoryUrl` injected as a `--receive-pack` git opti
   // run an arbitrary binary when pushing to the (configured) remote.
   const repositoryUrl = `--receive-pack=touch ${marker}`;
 
-  await t.throwsAsync(push(repositoryUrl, { cwd }));
+  await t.throwsAsync(push(repositoryUrl, "tag_name", { cwd }));
 
   t.false(existsSync(marker));
 });

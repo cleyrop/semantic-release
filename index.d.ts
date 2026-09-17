@@ -645,6 +645,9 @@ declare module "semantic-release" {
      */
     tagFormat?: string | undefined;
 
+    /** Release-unit JSON ledger with mapped historical commits and channel/version baselines. */
+    releaseBaselineFile?: string | undefined;
+
     /**
      * Define the list of plugins to use. Plugins will run in series, in
      * the order defined, for each [step](https://semantic-release.gitbook.io/semantic-release/#release-steps)

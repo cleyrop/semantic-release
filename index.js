@@ -127,7 +127,7 @@ async function run(context, plugins) {
           cwd,
           env,
         });
-        await push(options.repositoryUrl, { cwd, env });
+        await push(options.repositoryUrl, nextRelease.gitTag, { cwd, env });
         await pushNotes(options.repositoryUrl, nextRelease.gitTag, {
           cwd,
           env,
@@ -163,7 +163,7 @@ async function run(context, plugins) {
 
   if (context.lastRelease.gitTag) {
     logger.log(
-      `Found git tag ${context.lastRelease.gitTag} associated with version ${context.lastRelease.version} on branch ${context.branch.name}`
+      `Found ${context.lastRelease.historical ? "baseline" : "git tag"} ${context.lastRelease.gitTag} associated with version ${context.lastRelease.version} on branch ${context.branch.name}`
     );
   } else {
     logger.log(`No git tag version found on branch ${context.branch.name}`);
@@ -207,7 +207,7 @@ async function run(context, plugins) {
     // Create the tag before calling the publish plugins as some require the tag to exists
     await tag(nextRelease.gitTag, nextRelease.gitHead, { cwd, env });
     await addNote({ channels: [nextRelease.channel] }, nextRelease.gitTag, { cwd, env });
-    await push(options.repositoryUrl, { cwd, env });
+    await push(options.repositoryUrl, nextRelease.gitTag, { cwd, env });
     await pushNotes(options.repositoryUrl, nextRelease.gitTag, { cwd, env });
     logger.success(`Created tag ${nextRelease.gitTag}`);
   }
